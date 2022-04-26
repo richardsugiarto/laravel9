@@ -24,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        session()->put('locale', 'id');
+        app()->setLocale(session()->get('locale'));
     }
 }
