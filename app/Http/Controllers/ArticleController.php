@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Validator;
 use Auth;
 
@@ -35,6 +36,16 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function getlocale()
+    {
+        $locale = "en";
+        if(Session::get("locale")!=null)
+        {
+            $locale=Session::get("locale");
+        }
+        return $locale;
+    }
+
     public function store(Request $request)
     {
         //
@@ -48,10 +59,12 @@ class ArticleController extends Controller
         }
         else
         {
+            $locale =
             $article = new Article;
             $article->title = $request->title;
             $article->content = $request->content;
             $article->user_id = $request->id_users;
+            $article->locale = $this->getlocale();
             $article->save();
          
             return redirect('/post_article')->with('success','You have post an Article.');
@@ -61,7 +74,8 @@ class ArticleController extends Controller
 
     public function showall()
     {
-        $articles = Article::orderBy('created_at', 'asc')->get();
+        $locale = $this->getlocale();
+        $articles = Article::orderBy('created_at', 'asc')->where('locale','=',$locale)->get();
         return view('all_article', [
             'articles' => $articles
         ]);

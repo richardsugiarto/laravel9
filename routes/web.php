@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ArticleController;
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,7 @@ use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('myhome');
-});
+})->middleware('web');
 //Auth::routes();
 Route::view('/home', 'home')->middleware('auth','verified');
 

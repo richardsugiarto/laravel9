@@ -413,10 +413,9 @@ return [
             'languages' => [
                 'en' => 'English',
                 'zh-CN' => '简体中文',
-                'zh-TW' => '正體中文',
             ],
             // default locale
-            'default' => 'en',
+            'default' => 'zh-CN',
             // if or not show multi-language login page, optional, default is true
             'show-login-page' => true,
             // if or not show multi-language navbar, optional, default is true
